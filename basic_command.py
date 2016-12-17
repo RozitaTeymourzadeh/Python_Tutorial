@@ -12,6 +12,11 @@ def basic_command():
 if __name__== "__main__":
         basic_command()
         
+		Num = 9//2 
+		print num # it rounds the result to 4
+		
+		power = 5 ** 3 
+		print power # it calculate 5 power of 3
         
         type(int(3.5))
         text = 'String Type'

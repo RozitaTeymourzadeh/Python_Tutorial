@@ -18,7 +18,7 @@ def get_page_url(name):
 	return "%s/%s" % (base_url(),page_name)
 	
 if __name__ == "__main__":
-	print get_page_url('home')
-	print get_page_url('services')
-	print get_page_url('contact')
+	print(get_page_url('home'))
+	print(get_page_url('services'))
+	print(get_page_url('contact'))
        

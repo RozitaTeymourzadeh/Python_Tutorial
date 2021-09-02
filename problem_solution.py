@@ -4,6 +4,9 @@ Created on Aug 12 2021
 
 @author: rozita.teymourzadeh
 """
+import math
+
+
 class Solution:
     """
     3. Longest Substring Without Repeating Characters
@@ -115,6 +118,33 @@ class Solution:
                         res += s[i + increment - 2 * r]
             return res
 
+
+
+        """
+        7. Reverse Integer
+        Given a signed 32-bit integer x, return x with its digits reversed. 
+        If reversing x causes the value to go outside the signed 32-bit integer 
+        range [-231, 231 - 1], then return 0.
+        Input: x = 123
+        Output: 321
+        Input: x = 0
+        Output: 0    
+        """
+
+        def reverse(self, x: int) -> int:
+            MIN = -2**31
+            MAX = (2**31) - 1
+            res = 0
+            while x:
+                digit = int(math.fmod(x, 10))
+                x = int(x/10)
+                if (res > MAX // 10 or (res == MAX //10 and digit >= MAX % 10)):
+                    return 0
+                if (res < MIN //10 or (res == MIN //10 and digit <= MIN % 10)):
+                    return 0
+                res = res * 10 + digit
+            return res
+        
 if __name__ == "__main__":
     obj = Solution()
 

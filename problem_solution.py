@@ -83,6 +83,38 @@ class Solution:
                 self.maxlen = r - l - 1
                 self.start = l + 1
 
+        """
+        6. ZigZag Conversion
+        The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: 
+        (you may want to display this pattern in a fixed font for better legibility)
+        And then read line by line: "PAHNAPLSIIGYIR"
+        P   A   H   N
+        A P L S I I G
+        Y   I   R
+
+        Input: s = "PAYPALISHIRING", numRows = 3
+        Output: "PAHNAPLSIIGYIR"
+        
+        Input: s = "PAYPALISHIRING", numRows = 4
+        Output: "PINALSIGYAHRPI"
+        Explanation:
+        P     I    N
+        A   L S  I G
+        Y A   H R
+        P     I
+        """
+
+        def convert(self, s: str, numRows: int) -> str:
+            if numRows == 1: return s
+            res = ""
+            for r in range(numRows):
+                increment = (numRows - 1) * 2
+                for i in range(r,len(s), increment):
+                    res += s[i]
+                    if (r > 0 and r < numRows -1 and i + increment - 2 * r < len(s)):
+                        res += s[i + increment - 2 * r]
+            return res
+
 if __name__ == "__main__":
     obj = Solution()
 

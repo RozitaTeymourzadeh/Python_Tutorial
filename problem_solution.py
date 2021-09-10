@@ -144,6 +144,58 @@ class Solution:
                     return 0
                 res = res * 10 + digit
             return res
+
+        """
+        8. String to Integer (atoi)
+        Implement the myAtoi(string s) function, which converts a string to a 32-bit signed integer 
+
+        Input: s = "42"
+        Output: 42
+        
+        Condition:
+        - whitespace
+        - +/- symbol
+        - numbers
+        - between MAX_INT and MIN_INT constraints
+        - random characters 
+        """
+
+        def myAtoi(self, s: str) -> int:
+
+            result = 0
+            i = 0
+            negative = 1
+            MAX_INT = (2 ** 31) - 1
+            MIN_INT = -2 ** 31
+
+            # check corner cases
+            # Whitespace
+            while i < len(s) and s[i] == ' ':
+                i += 1
+
+            # Sign
+            if i < len(s) and s[i] == '-':
+                i += 1
+                negative = -1
+            elif i <len(s) and s[i] == '+':
+                i += 1
+                negative = 1
+            # number
+            checker = set('0123456789')
+            while i < len(s) and s[i] in checker:
+                # check overflow
+                if result > MAX_INT/10 or (result == MAX_INT/10 and int(s[i]) > 7):
+                    return MAX_INT if negative == 1 else MIN_INT
+                result = result * 10 + int(s[i])
+                i += 1
+
+            result = result * negative
+            # check for max and Min
+            if result < 0:
+                return max(result, MIN_INT)
+            return min(result,MAX_INT)
+
+
         
 if __name__ == "__main__":
     obj = Solution()

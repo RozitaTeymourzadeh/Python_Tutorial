@@ -1,4 +1,11 @@
-# Python_Tutorial
-The objectiveof this repository is to target interview questions posted in different platforms such as LeetCode. 
-The repository is updated in a frequent basis. 
+# Python Tutorial
+
+## Objective: 
+
+To solve Interview question!
+
+## Target Questions:
+
+The objective of this repository is to target interview questions posted in a different platforms such as LeetCode. 
+The repository will be updated in a frequent basis. 
 

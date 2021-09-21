@@ -285,7 +285,51 @@ def isMatch(self, s: str, p: str) -> bool:
 
     return dfs(0, 0)
 
+"""
+11. Given n non-negative integers a1, a2, ..., an , where each represents a point at coordinate (i, ai). 
+n vertical lines are drawn such that the two endpoints of the line i is at (i, ai) and (i, 0).
+Find two lines, which, together with the x-axis forms a container, such that the container contains the most water.
+
+Notice that you may not slant the container.
+
+Input: height = [1,8,6,2,5,4,8,3,7]
+Output: 49
+Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. 
+In this case, the max area of water (blue section) the container can contain is 49.
+
+Input: height = [1,1]
+Output: 1
+
+Input: height = [4,3,2,1,4]
+Output: 16
+
+Input: height = [1,2,1]
+Output: 2
+
+Condition:
+n == height.length
+2 <= n <= 105
+0 <= height[i] <= 104
+"""
+def maxArea(self, height: List[int]) -> int:
+    # Ref: Google Engineer Explains
+    best_volume = 0
+
+    r = 0
+    l = len(height) - 1
+
+    while r < l:
+        current_volume = min(height[l],height[r]) * (l - r)
+        best_volume = max(best_volume, current_volume)
+        if height[r] < height[l]:
+            r += 1
+        else:
+            l -= 1
+    return best_volume
+
+
 if __name__ == "__main__":
     print("Hello")
     result = isPalindrome(x=121)
+    max_volume = maxArea(height=[1,8,6,2,5,4,8,3,7])
     print(result)

@@ -478,6 +478,52 @@ def longestCommonPrefix(self, strs: List[str])-> str:
         res += strs[0][i]
     return res
 
+'''
+Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+
+Notice that the solution set must not contain duplicate triplets.
+
+Example 1:
+
+Input: nums = [-1,0,1,2,-1,-4]
+Output: [[-1,-1,2],[-1,0,1]]
+Example 2:
+
+Input: nums = []
+Output: []
+Example 3:
+
+Input: nums = [0]
+Output: []
+ 
+
+Constraints:
+
+0 <= nums.length <= 3000
+-105 <= nums[i] <= 105
+'''
+def threeSum(self, num: List[int])-> List[List[int]]:
+    res = []
+    num.sort()
+
+    for i, a in enumerate(num):
+        if i > 0 and a == num[i - 1]:
+            continue
+        l, r = i + 1, len(num) - 1
+        while l < r:
+            sum = a + num[l] + num[r]
+            if sum == 0:
+                res.append([a, num[l], num[r]])
+                l += 1
+                while num[l] == num[l - 1] and l < r:
+                    l += 1
+            elif sum < 0:
+                l += 1
+            else:
+                r -= 1
+    return res
+
+
 
 if __name__ == "__main__":
     print("Hello")

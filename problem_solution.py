@@ -479,7 +479,7 @@ def longestCommonPrefix(self, strs: List[str])-> str:
     return res
 
 '''
-Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+15. Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
 
 Notice that the solution set must not contain duplicate triplets.
 
@@ -522,6 +522,61 @@ def threeSum(self, num: List[int])-> List[List[int]]:
             else:
                 r -= 1
     return res
+"""
+16. 3Sum Closest
+Given an integer array nums of length n and an integer target, find three integers in nums such that the sum is closest to target.
+
+Return the sum of the three integers.
+
+You may assume that each input would have exactly one solution.
+
+ 
+
+Example 1:
+
+Input: nums = [-1,2,1,-4], target = 1
+Output: 2
+Explanation: The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+Example 2:
+
+Input: nums = [0,0,0], target = 1
+Output: 0
+ 
+
+Constraints:
+
+3 <= nums.length <= 1000
+-1000 <= nums[i] <= 1000
+-104 <= target <= 104
+
+"""
+
+def threeSumClosest(self, num: List[int], target: int)-> int:
+    best_sum = 100000
+    num.sort()
+
+    for i in range(0, len(num)-2):
+        if num[i] == num[i-1] and i > 0:
+            continue
+        lower = i + 1
+        upper = len(num) - 1
+
+        while lower < upper:
+            sum = num[i] + num[lower] + num[upper]
+
+            if sum == target:
+                return sum
+            if abs(target - sum ) < abs (target - best_sum):
+                best_sum = sum
+            if sum <= target:
+                lower += 1
+                while num[lower] == num[lower-1] and lower < upper:
+                    lower += 1
+            else:
+                upper -= 1
+
+    return best_sum
+
 
 
 
@@ -529,4 +584,5 @@ if __name__ == "__main__":
     print("Hello")
     result = isPalindrome(x=121)
     max_volume = maxArea(height=[1,8,6,2,5,4,8,3,7])
+    result_3sum = threeSumClosest([-1,2,1,-4])
     print(result)

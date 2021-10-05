@@ -629,10 +629,41 @@ def letterCombinations(self, digits:str) -> List[str]:
         backtrack(0, "")
     return res
 
+def fourSum(self, nums:List[int], target: int) -> List[List[int]]:
+    length = len(nums)
+    if length < 4:
+        return []
+    nums.sort()
+
+    def two_sum(lst, total):
+        d = {}
+        helper_st = set()
+        for i, num in enumerate(lst):
+            target_num = total - num
+            if target_num not in d:
+                d[num] = i
+            else:
+                helper_st.add((target_num, num))
+        return helper_st
+
+    st = set()
+    for i in range(length-3):
+        for j in range(i+1, length-2):
+            n1 = nums[i]
+            n2 = nums[j]
+            target_total = target - n1 - n2
+            helper_res = two_sum(nums[j+1:], target_total)
+            if helper_res:
+                for x in helper_res:
+                    n3, n4 = x
+                    st.add((n1, n2, n3, n4))
+    return st
+
 
 if __name__ == "__main__":
     print("Hello")
     result = isPalindrome(x=121)
     max_volume = maxArea(height=[1,8,6,2,5,4,8,3,7])
     result_3sum = threeSumClosest([-1,2,1,-4])
+    # print(solution().letterCombination("34"))
     print(result)

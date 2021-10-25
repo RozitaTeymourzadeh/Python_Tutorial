@@ -1302,6 +1302,60 @@ def nextPermutation(self, nums: List[int]) -> None:
         next_num += 1
     self.swap(nums, next_num, dec)
 
+"""
+32. Longest Valid Parentheses
+
+Given a string containing just the characters '(' and ')', find the length of the longest valid (well-formed) parentheses substring.
+
+ 
+
+Example 1:
+
+Input: s = "(()"
+Output: 2
+Explanation: The longest valid parentheses substring is "()".
+Example 2:
+
+Input: s = ")()())"
+Output: 4
+Explanation: The longest valid parentheses substring is "()()".
+Example 3:
+
+Input: s = ""
+Output: 0
+ 
+
+Constraints:
+
+0 <= s.length <= 3 * 104
+s[i] is '(', or ')'.
+"""
+
+def longestValidParentheses(self, s: str)-> int:
+    close, open = 0,0
+    maximum = 0
+    # Check paranthesise from left to right
+    for p in s:
+        if p == "(":
+            open += 1
+        else:
+            close += 1
+        if close == open:
+            maximum = max(maximum, 2 * close)
+        elif close > open:
+            close, open = 0, 0
+    # check paranthesize from right to left
+    close, open = 0, 0
+    for p in reversed(s):
+        if p == ")":
+            close += 1
+        else:
+            open += 1
+        if close == open:
+            maximum = max(maximum, 2 * close)
+        elif open > close:
+            close, open = 0,
+    return maximum
 
 
 if __name__ == "__main__":

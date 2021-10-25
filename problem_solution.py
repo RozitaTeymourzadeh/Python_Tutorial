@@ -1203,6 +1203,106 @@ def divide(self, dividend: int , divisor: int) -> int:
             output = - output
         return min(2147483647, max(-2147483648, output))
 
+"""
+30. Substring with Concatenation of All Words
+
+You are given a string s and an array of strings words of the same length. Return all starting indices of substring(s) in s that is a concatenation of each word in words exactly once, in any order, and without any intervening characters.
+
+You can return the answer in any order.
+
+Example 1:
+
+Input: s = "barfoothefoobarman", words = ["foo","bar"]
+Output: [0,9]
+Explanation: Substrings starting at index 0 and 9 are "barfoo" and "foobar" respectively.
+The output order does not matter, returning [9,0] is fine too.
+Example 2:
+
+Input: s = "wordgoodgoodgoodbestword", words = ["word","good","best","word"]
+Output: []
+Example 3:
+
+Input: s = "barfoofoobarthefoobarman", words = ["bar","foo","the"]
+Output: [6,9,12]
+ 
+
+Constraints:
+
+1 <= s.length <= 104
+s consists of lower-case English letters.
+1 <= words.length <= 5000
+1 <= words[i].length <= 30
+words[i] consists of lower-case English letters.
+
+
+"""
+"""
+31. Next Permutation
+
+Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.
+
+If such an arrangement is not possible, it must rearrange it as the lowest possible order (i.e., sorted in ascending order).
+
+The replacement must be in place and use only constant extra memory.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,3]
+Output: [1,3,2]
+Example 2:
+
+Input: nums = [3,2,1]
+Output: [1,2,3]
+Example 3:
+
+Input: nums = [1,1,5]
+Output: [1,5,1]
+Example 4:
+
+Input: nums = [1]
+Output: [1]
+ 
+
+Constraints:
+
+1 <= nums.length <= 100
+0 <= nums[i] <= 100
+
+"""
+def swap(self, nums, ind1, ind2):
+    temp = nums[ind1]
+    nums[ind1] = nums[ind2]
+    nums[ind2] =  temp
+
+def reverse(self, nums, beg, end):
+    while beg < end:
+        self.swap(nums, beg, end)
+        beg += 1
+        end -= 1
+
+def nextPermutation(self, nums: List[int]) -> None:
+    """
+    Do not return anything , modify num inplace instead
+    """
+    if len(nums) == 1:
+        return
+    if len(nums) == 2:
+        return self.swap(nums, 0, 1)
+    dec = len(nums) - 2
+    # sort ascending
+    while dec >= 0 and nums[dec] >= nums[dec + 1]:
+        dec -= 1
+    self.reverse(nums, dec + 1, len(nums) - 1)
+    if dec == -1:
+        return
+    next_num = dec + 1
+    while next_num < len(nums) and nums[next_num] <= nums[dec]:
+        next_num += 1
+    self.swap(nums, next_num, dec)
+
+
 
 if __name__ == "__main__":
     print("Hello")

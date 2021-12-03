@@ -6,8 +6,7 @@ Created on Aug 12 2021
 """
 import math
 from typing import List
-
-from matplotlib import collections
+#from matplotlib import collections
 
 """
 3. Longest Substring Without Repeating Characters
@@ -1652,13 +1651,65 @@ def solveSudoku(self, board: List[List[str]]) -> None:
                 return False
     return True
 
+"""
+Q38. count and say
+The count-and-say sequence is a sequence of digit strings defined by the recursive formula:
+
+countAndSay(1) = "1"
+countAndSay(n) is the way you would "say" the digit string from countAndSay(n-1), which is then converted into a different digit string.
+To determine how you "say" a digit string, split it into the minimal number of groups so that each group is a contiguous section all of the same character. Then for each group, say the number of characters, then say the character. To convert the saying into a digit string, replace the counts with a number and concatenate every saying.
+
+For example, the saying and conversion for digit string "3322251":
+
+
+Given a positive integer n, return the nth term of the count-and-say sequence.
+
+ 
+
+Example 1:
+
+Input: n = 1
+Output: "1"
+Explanation: This is the base case.
+Example 2:
+
+Input: n = 4
+Output: "1211"
+Explanation:
+countAndSay(1) = "1"
+countAndSay(2) = say "1" = one 1 = "11"
+countAndSay(3) = say "11" = two 1's = "21"
+countAndSay(4) = say "21" = one 2 + one 1 = "12" + "11" = "1211"
+ 
+
+Constraints:
+
+1 <= n <= 30
+
+"""
+
+def countAndSay(n: int) -> str:
+    if n == 1:
+        return "1"
+
+    prev = countAndSay(n - 1)
+    cnt = 1
+    res = ""
+    for i in range(len(prev)):
+        if i == len(prev) - 1 or prev[i] != prev[i+1] :
+            res += str(cnt) + prev[i]
+            cnt = 1
+        else:
+            cnt += 1
+    return res
 
 if __name__ == "__main__":
     print("Hello")
     # result = isPalindrome(x=121)
     # max_volume = maxArea(height=[1,8,6,2,5,4,8,3,7])
     # result_3sum = threeSumClosest([-1,2,1,-4])
-    print(searchInsert([1, 3, 5, 6], 7))
+    # print(searchInsert([1, 3, 5, 6], 7))
+    print(countAndSay(5))
 
 
 

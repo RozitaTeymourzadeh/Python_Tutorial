@@ -606,7 +606,7 @@ digits[i] is a digit in the range ['2', '9'].
 
 """
 
-def letterCombinations(self, digits:str) -> List[str]:
+def letterCombinations(digits:str) -> List[str]:
 
     res=[]
     digitToChar = {
@@ -630,6 +630,9 @@ def letterCombinations(self, digits:str) -> List[str]:
         backtrack(0, "")
     return res
 
+'''
+18. fourSum
+'''
 def fourSum(self, nums:List[int], target: int) -> List[List[int]]:
     length = len(nums)
     if length < 4:
@@ -1869,6 +1872,117 @@ def firstMissingPositive(self, A:List[int])-> int:
             return i
     return len(A) + 1
 
+'''
+42. Trapping Rain Water
+
+Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
+
+ 
+
+Example 1:
+
+
+Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+Output: 6
+Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
+Example 2:
+
+Input: height = [4,2,0,3,2,5]
+Output: 9
+ 
+
+Constraints:
+
+n == height.length
+1 <= n <= 2 * 104
+0 <= height[i] <= 105
+
+'''
+def trap(self, height: List[int])-> int:
+    if not height: return 0
+    l, r = 0, len(height) - 1
+    maxLeft = height[l]
+    maxRight = height[r]
+    res = 0
+
+    while l < r:
+        if maxLeft < maxRight:
+            l += 1
+            maxLeft = max(maxLeft, height[l])
+            res += maxLeft - height[l]
+        else:
+            r -=1
+            maxRight = max(maxRight, height[r])
+            res += maxRight - height[r]
+    return res
+'''
+43. Multiply Strings
+Given two non-negative integers num1 and num2 represented as strings, return the product of num1 and num2, also represented as a string.
+
+Note: You must not use any built-in BigInteger library or convert the inputs to integer directly.
+
+ 
+
+Example 1:
+
+Input: num1 = "2", num2 = "3"
+Output: "6"
+Example 2:
+
+Input: num1 = "123", num2 = "456"
+Output: "56088"
+ 
+
+Constraints:
+
+1 <= num1.length, num2.length <= 200
+num1 and num2 consist of digits only.
+Both num1 and num2 do not contain any leading zero, except the number 0 itself.
+
+
+'''
+def multiply(num1: str, num2: str)-> str:
+    if "0" in [num1, num2]:
+        return "0"
+
+"""
+45. Jump Game II
+
+Given an array of non-negative integers nums, you are initially positioned at the first index of the array.
+Each element in the array represents your maximum jump length at that position.
+Your goal is to reach the last index in the minimum number of jumps.
+You can assume that you can always reach the last index.
+
+Example 1:
+
+Input: nums = [2,3,1,1,4]
+Output: 2
+Explanation: The minimum number of jumps to reach the last index is 2. Jump 1 step from index 0 to 1, then 3 steps to the last index.
+Example 2:
+
+Input: nums = [2,3,0,1,4]
+Output: 2
+ 
+Constraints:
+
+1 <= nums.length <= 104
+0 <= nums[i] <= 1000
+"""
+def jump(self, nums:List[int])-> int:
+    l = r = 0
+    res = 0
+
+    while r < len(nums) - 1:
+        farthest = 0
+        for i in range (l, r+1):
+            farthest = max(farthest, i + nums[i])
+        l = r + 1
+        r = farthest
+        res += 1
+    return res
+
+
+
 
 if __name__ == "__main__":
     print("Hello")
@@ -1876,7 +1990,8 @@ if __name__ == "__main__":
     # max_volume = maxArea(height=[1,8,6,2,5,4,8,3,7])
     # result_3sum = threeSumClosest([-1,2,1,-4])
     # print(searchInsert([1, 3, 5, 6], 7))
-    print(countAndSay(5))
+    #print(countAndSay(5))
+    print(letterCombinations("23"))
 
 
 
